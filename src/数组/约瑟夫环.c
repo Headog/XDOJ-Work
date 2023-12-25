@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct person {
+typedef struct num_node {
     size_t id;
     size_t code;
-    struct person *next;
+    struct num_node *next;
 } person;
 
 typedef struct {
     person *root;
     size_t size;
-} persons_list;
+} nums_list;
 
-persons_list *create_persons_list(person *root) {
-    persons_list *result = (persons_list *)malloc(sizeof(persons_list));
+nums_list *create_nums_list(person *root) {
+    nums_list *result = (nums_list *)malloc(sizeof(nums_list));
     result->root = root;
     result->size = 1;
     return result;
@@ -27,7 +27,7 @@ person *create_person(size_t id, size_t code) {
     return result;
 }
 
-void push_back_persons_list(persons_list *plist, person *new_person) {
+void push_back_persons_list(nums_list *plist, person *new_person) {
     person *now = plist->root;
     while (now->next) {
         now = now->next;
@@ -36,7 +36,7 @@ void push_back_persons_list(persons_list *plist, person *new_person) {
     plist->size++;
 }
 
-person *delete_person(persons_list *plist, person *to_be_deleted) {
+person *delete_person(nums_list *plist, person *to_be_deleted) {
     person *now = to_be_deleted;
     while (to_be_deleted != now->next) {
         now = now->next;
@@ -52,7 +52,7 @@ void shift_person(person **person, size_t index_diff) {
     }
 }
 
-void stroke_persons_list(persons_list *plist) {
+void stroke_persons_list(nums_list *plist) {
     person *now = plist->root;
     while (now->next) {
         now = now->next;
@@ -63,7 +63,7 @@ void stroke_persons_list(persons_list *plist) {
 int main(void) {
     size_t n, m, code;
     scanf("%zu%zu%zu", &n, &m, &code);
-    persons_list *plist = create_persons_list(create_person(1, code));
+    nums_list *plist = create_nums_list(create_person(1, code));
     person *now = plist->root;
     for (size_t i = 2; i <= n; i++) {
         scanf("%zu", &code);
